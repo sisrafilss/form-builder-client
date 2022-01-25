@@ -1,7 +1,20 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import Navigation from "../Navigation/Navigation";
 
 const GenerateForm = () => {
+  //   React Hook Form
+  /*   const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+  }; */
+  const [fieldType, setFieldType] = useState([]);
+  const [fieldName, setFieldName] = useState([]);
   const [form, setForm] = useState([
     <>
       <label htmlFor="formName" className="mb-2">
@@ -23,10 +36,21 @@ const GenerateForm = () => {
 
   const handleGenerate = (e) => {
     e.preventDefault();
+    const types = [];
+    const fname = [];
     for (let i = 0; i < e.target.length - 1; i++) {
-      console.log(e.target[i].name, e.target[i].value);
+    //   console.log(e.target[i].name, e.target[i].value);
+
+      types.push(e.target[i].name);
+      fname.push(e.target[i].value);
     }
+    setFieldType(types);
+    setFieldName(fname);
+   
   };
+
+  console.log(fieldType);
+  console.log(fieldName);
 
   return (
     <>
