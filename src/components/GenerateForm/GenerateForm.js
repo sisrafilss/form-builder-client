@@ -1,18 +1,7 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import Navigation from "../Navigation/Navigation";
 
 const GenerateForm = () => {
-  //   React Hook Form
-  /*   const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-  }; */
   const [fieldType, setFieldType] = useState([]);
   const [fieldName, setFieldName] = useState([]);
   const [form, setForm] = useState([

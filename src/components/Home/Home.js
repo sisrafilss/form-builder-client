@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navigation from "../Navigation/Navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { setFormList } from "../../store/formList";
 
 const Home = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setFormList(["Contact", "Result", "Accomodation", "Food"]));
+  }, []); 
+
+  const formList = useSelector((state) => state.entities.formList.formList);
+
   return (
     <>
       <Navigation />
@@ -52,38 +62,19 @@ const Home = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td className="text-primary">Contact</td>
-                  <td>
-                    {" "}
-                    <button className="btn btn-success btn-sm">
-                      Report
-                    </button>{" "}
-                  </td>
-                </tr>
-
-                <tr>
-                  <th scope="row">2</th>
-                  <td className="text-primary">Result</td>
-                  <td>
-                    {" "}
-                    <button className="btn btn-success btn-sm">
-                      Report
-                    </button>{" "}
-                  </td>
-                </tr>
-
-                <tr>
-                  <th scope="row">3</th>
-                  <td className="text-primary">Accomodation</td>
-                  <td>
-                    {" "}
-                    <button className="btn btn-success btn-sm">
-                      Report
-                    </button>{" "}
-                  </td>
-                </tr>
+                {formList.length &&
+                  formList.map((frm, index) => (
+                    <tr key={index}>
+                      <th scope="row">{++index}</th>
+                      <td className="text-primary">{frm}</td>
+                      <td>
+                        {" "}
+                        <button className="btn btn-success btn-sm">
+                          Report
+                        </button>{" "}
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
             {/* Table Data Count and Pagination */}
