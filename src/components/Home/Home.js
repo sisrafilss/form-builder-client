@@ -16,9 +16,8 @@ const Home = () => {
                 <div>
                   <span>Show </span>
                   <select
-                    className="p-1"
+                    className="p-1 d-inline"
                     aria-label="Default select example"
-                    className="d-inline"
                   >
                     <option value="1">10</option>
                     {/* <option value="2">Two</option>
@@ -107,10 +106,7 @@ const Home = () => {
                       </span>
                     </li>
                     <li className="page-item">
-                      <span
-                        style={style.activePage}
-                        className="page-link px-3"
-                      >
+                      <span style={style.activePage} className="page-link px-3">
                         1
                       </span>
                     </li>
