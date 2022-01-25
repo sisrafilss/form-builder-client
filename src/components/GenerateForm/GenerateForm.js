@@ -39,14 +39,13 @@ const GenerateForm = () => {
     const types = [];
     const fname = [];
     for (let i = 0; i < e.target.length - 1; i++) {
-    //   console.log(e.target[i].name, e.target[i].value);
+      //   console.log(e.target[i].name, e.target[i].value);
 
       types.push(e.target[i].name);
       fname.push(e.target[i].value);
     }
     setFieldType(types);
     setFieldName(fname);
-   
   };
 
   console.log(fieldType);
