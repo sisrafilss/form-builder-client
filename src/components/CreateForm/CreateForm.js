@@ -1,10 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { updateFormData } from "../../store/formList";
 
 import Navigation from "../Navigation/Navigation";
 
 const CreateForm = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   // Captture id from slug
   const { id } = useParams();
 
@@ -17,6 +22,30 @@ const CreateForm = () => {
   //   Create the form
   const generatedForm = generateForm(form);
 
+  // handle submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const labels = [];
+    const values = [];
+    for (let i = 0; i < e.target.length - 1; i++) {
+      // console.log(e.target[i].name, e.target[i].value);
+
+      labels.push(e.target[i].name);
+      values.push(e.target[i].value);
+    }
+    const formData = {
+      id: form._id,
+      labels: labels,
+      values: values,
+    };
+    // console.log(formData);
+    dispatch(updateFormData(formData));
+
+    // Redirect to the form view page
+    const from = `/form/${form._id}`;
+    navigate(from, { replace: true });
+  };
+
   return (
     <div>
       <Navigation />
@@ -26,7 +55,7 @@ const CreateForm = () => {
           <div className="card-body">
             {/* Insert Form Data */}
             <div>
-              <form>
+              <form onSubmit={handleSubmit}>
                 {generatedForm.map((frm, index) => (
                   <div key={index} className="mb-3">
                     {frm}
@@ -61,7 +90,7 @@ const generateForm = (form) => {
           <label className="mb-2" htmlFor="">
             {fieldLabels[i]}
           </label>
-          <input className="form-control" type="text" />
+          <input className="form-control" name={fieldLabels[i]} type="text" />
         </>
       );
     } else if (fieldTypes[i] === "Number") {
@@ -70,7 +99,7 @@ const generateForm = (form) => {
           <label className="mb-2" htmlFor="">
             {fieldLabels[i]}
           </label>
-          <input className="form-control" type="number" />
+          <input className="form-control" name={fieldLabels[i]} type="number" />
         </>
       );
     } else if (fieldTypes[i] === "Date") {
@@ -79,7 +108,7 @@ const generateForm = (form) => {
           <label className="mb-2" htmlFor="">
             {fieldLabels[i]}
           </label>
-          <input className="form-control" type="date" />
+          <input className="form-control" name={fieldLabels[i]} type="date" />
         </>
       );
     } else if (fieldTypes[i] === "Textarea") {
@@ -88,7 +117,11 @@ const generateForm = (form) => {
           <label className="mb-2" htmlFor="">
             {fieldLabels[i]}
           </label>
-          <textarea className="form-control" type="number"></textarea>
+          <textarea
+            className="form-control"
+            name={fieldLabels[i]}
+            type="number"
+          ></textarea>
         </>
       );
     } else if (fieldTypes[i] === "Email") {
@@ -97,7 +130,7 @@ const generateForm = (form) => {
           <label className="mb-2" htmlFor="">
             {fieldLabels[i]}
           </label>
-          <input className="form-control" type="email" />
+          <input className="form-control" name={fieldLabels[i]} type="email" />
         </>
       );
     }

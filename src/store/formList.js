@@ -12,10 +12,13 @@ const formList = createSlice({
     loadFormSuccess: (state, action) => {
       state.formList = action.payload;
     },
+    setFormData: (state, action) => {
+      console.log(action.payload);
+    },
   },
 });
 
-export const { loadFormSuccess } = formList.actions;
+export const { loadFormSuccess, setFormData } = formList.actions;
 
 export default formList.reducer;
 
@@ -33,4 +36,12 @@ export const loadFormList = () =>
   apiCallBegan({
     url,
     onSuccess: loadFormSuccess.type,
+  });
+
+export const updateFormData = (data) =>
+  apiCallBegan({
+    url,
+    method: "put",
+    data,
+    onSuccess: setFormData.type,
   });

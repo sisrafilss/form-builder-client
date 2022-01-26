@@ -1,20 +1,32 @@
 import React, { useEffect } from "react";
-import Navigation from "../Navigation/Navigation";
-import { useDispatch, useSelector } from "react-redux";
-import { loadFormList } from "../../store/formList";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import Navigation from "../components/Navigation/Navigation";
+import { loadFormList } from "../store/formList";
 
-const Home = () => {
+const FormView = () => {
+  // Captture id from slug
+  const { id } = useParams();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadFormList());
   }, [dispatch]);
 
+  //   Get form List from store
   const formList = useSelector((state) => state.entities.formList.formList);
 
+  //   Find specific form against id
+  const form = formList.find((frm) => frm._id === id);
+
+  const { labels, values } = form.formData;
+  console.log(labels);
+  console.log(values);
+
   return (
-    <>
+    <div>
       <Navigation />
       <div className="container mt-5">
         <div className="card shadow">
@@ -57,34 +69,22 @@ const Home = () => {
             <table className="table table-striped">
               <thead>
                 <tr>
-                  <th scope="col">SI.</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Action</th>
+                  {labels.map((label, index) => (
+                    <th key={index} scope="col">
+                      {label}
+                    </th>
+                  ))}
                 </tr>
               </thead>
+
               <tbody>
-                {formList.length &&
-                  formList.map((frm, index) => (
-                    <tr key={index}>
-                      <th scope="row">{++index}</th>
-                      <td>
-                        <Link
-                          className="text-primary text-decoration-none"
-                          to={`/home/${frm._id}`}
-                        >
-                          {frm.name}
-                        </Link>
-                      </td>
-                      <td>
-                        <Link
-                          to={`/form/${frm._id}`}
-                          className="btn btn-success btn-sm"
-                        >
-                          Report
-                        </Link>
-                      </td>
-                    </tr>
-                  ))}
+                {values.map((value, index) => (
+                  <tr key={index}>
+                    {value.map((val, indx) => (
+                      <td key={indx}>{val}</td>
+                    ))}
+                  </tr>
+                ))}
               </tbody>
             </table>
             {/* Table Data Count and Pagination */}
@@ -126,11 +126,11 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default Home;
+export default FormView;
 
 const style = {
   activePage: {

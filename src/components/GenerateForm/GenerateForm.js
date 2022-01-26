@@ -41,9 +41,6 @@ const GenerateForm = () => {
       types.push(e.target[i].name);
       fname.push(e.target[i].value);
     }
-    // setFieldType(types);
-    // setFieldName(fname);
-
     const newForm = {
       name: fname[0],
       fieldTypes: types,
