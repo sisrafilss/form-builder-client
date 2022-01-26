@@ -30,7 +30,7 @@ const FormView = () => {
       {!form.formData ? (
         <div className="text-center mt-5">
           <h2 className="dispaly-2 text-center text-danger mb-4">
-            Form Data Not Found. Please Add Some Data!
+            No Entry Found. Please Add Some Entries!
           </h2>
           <Link to="/" className="btn btn-primary">
             Go Home
@@ -46,14 +46,11 @@ const FormView = () => {
                 <div>
                   <div>
                     <span>Show </span>
-                    <select
-                      className="p-1 d-inline"
-                      aria-label="Default select example"
-                    >
-                      <option value="1">10</option>
-                      {/* <option value="2">Two</option>
-                    <option value="3">Three</option> */}
-                    </select>
+                    <input
+                      type="number"
+                      defaultValue={10}
+                      style={{ width: "40px" }}
+                    />
                     <span> entries</span>
                   </div>
                 </div>
@@ -99,7 +96,10 @@ const FormView = () => {
               {/* Table Data Count and Pagination */}
               <div className="d-flex justify-content-between mt-3">
                 <div>
-                  <p>Showing 1 to 3 of 3 entries</p>
+                  <p>
+                    Showing {values.length ? 1 : 0} to {values.length} of{" "}
+                    {values.length} entries
+                  </p>
                 </div>
 
                 {/* Table Data Pagination */}

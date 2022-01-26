@@ -13,6 +13,10 @@ const Home = () => {
 
   const formList = useSelector((state) => state.entities.formList.formList);
 
+  // handle Search
+  const handleOnChange = (e) => {
+    console.log(e.target.value);
+  };
   return (
     <>
       <Navigation />
@@ -25,14 +29,11 @@ const Home = () => {
               <div>
                 <div>
                   <span>Show </span>
-                  <select
-                    className="p-1 d-inline"
-                    aria-label="Default select example"
-                  >
-                    <option value="1">10</option>
-                    {/* <option value="2">Two</option>
-                    <option value="3">Three</option> */}
-                  </select>
+                  <input
+                    type="number"
+                    defaultValue={10}
+                    style={{ width: "40px" }}
+                  />
                   <span> entries</span>
                 </div>
               </div>
@@ -48,6 +49,7 @@ const Home = () => {
                     type="text"
                     placeholder="Search"
                     aria-label="Search"
+                    onChange={handleOnChange}
                   />
                 </form>
               </div>
@@ -90,7 +92,10 @@ const Home = () => {
             {/* Table Data Count and Pagination */}
             <div className="d-flex justify-content-between mt-3">
               <div>
-                <p>Showing 1 to 3 of 3 entries</p>
+                <p>
+                  Showing {formList.length ? 1 : 0} to {formList.length} of{" "}
+                  {formList.length} entries
+                </p>
               </div>
 
               {/* Table Data Pagination */}
