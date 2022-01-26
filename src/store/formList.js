@@ -13,7 +13,7 @@ const formList = createSlice({
       state.formList = action.payload;
     },
     setFormData: (state, action) => {
-      console.log(action.payload);
+      // console.log(action.payload);
     },
   },
 });

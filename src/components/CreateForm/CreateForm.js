@@ -28,8 +28,6 @@ const CreateForm = () => {
     const labels = [];
     const values = [];
     for (let i = 0; i < e.target.length - 1; i++) {
-      // console.log(e.target[i].name, e.target[i].value);
-
       labels.push(e.target[i].name);
       values.push(e.target[i].value);
     }
@@ -38,7 +36,6 @@ const CreateForm = () => {
       labels: labels,
       values: values,
     };
-    // console.log(formData);
     dispatch(updateFormData(formData));
 
     // Redirect to the form view page
