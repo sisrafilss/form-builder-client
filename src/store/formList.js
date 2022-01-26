@@ -13,7 +13,30 @@ const formList = createSlice({
       state.formList = action.payload;
     },
     setFormData: (state, action) => {
+      state.formList.push(action.payload);
+    },
+    setUpdateFormData: (state, action) => {
       // console.log(action.payload);
+      const id = action.payload._id;
+      const index = state.formList.findIndex((form) => form._id === id);
+
+      if (state.formList[index].formData) {
+        console.log(action.payload.values);
+        state.formList[index].formData.values.push(action.payload.values);
+      } else {
+        state.formList[index].formData = {
+          labels: action.payload.labels,
+          values: [action.payload.values],
+        };
+      }
+      // if (result.formData) {
+      //   result.formData.values.push(action.payload.values);
+      // } else {
+      //   result.formData = {
+      //     labels: action.payload.labels,
+      //     values: [action.payload.values],
+      //   };
+      // }
     },
     setFormDelete: (state, action) => {
       // console.log(action.payload);
@@ -28,7 +51,12 @@ const formList = createSlice({
   },
 });
 
-export const { loadFormSuccess, setFormData, setFormDelete } = formList.actions;
+export const {
+  loadFormSuccess,
+  setFormData,
+  setFormDelete,
+  setUpdateFormData,
+} = formList.actions;
 
 export default formList.reducer;
 
@@ -41,6 +69,7 @@ export const saveNewForm = (data) =>
     url,
     method: "post",
     data,
+    onSuccess: setFormData.type,
   });
 
 // Load form List
@@ -56,7 +85,7 @@ export const updateFormData = (data) =>
     url,
     method: "put",
     data,
-    onSuccess: setFormData.type,
+    onSuccess: setUpdateFormData.type,
   });
 
 // Handle Delete

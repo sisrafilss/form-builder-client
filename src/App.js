@@ -3,7 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
 import GenerateForm from "./components/GenerateForm/GenerateForm";
 import CreateForm from "./components/CreateForm/CreateForm";
-import FormView from "./FormView/FormView";
+import FormView from "./components/FormView/FormView";
+
 
 function App() {
   return (

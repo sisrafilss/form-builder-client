@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import Navigation from "../components/Navigation/Navigation";
-import { loadFormList } from "../store/formList";
+import { loadFormList } from "../../store/formList";
+import Navigation from "../Navigation/Navigation";
 
 const FormView = () => {
   // Captture id from slug
@@ -11,9 +11,9 @@ const FormView = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(loadFormList());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(loadFormList());
+  // }, [dispatch]);
 
   //   Get form List from store
   const formList = useSelector((state) => state.entities.formList.formList);
