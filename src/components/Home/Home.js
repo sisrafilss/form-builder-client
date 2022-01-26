@@ -8,7 +8,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(setFormList(["Contact", "Result", "Accomodation", "Food"]));
-  }, []); 
+  }, [dispatch]); 
 
   const formList = useSelector((state) => state.entities.formList.formList);
 
