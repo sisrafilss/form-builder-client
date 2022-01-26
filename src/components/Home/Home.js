@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Navigation from "../Navigation/Navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { loadFormList } from "../../store/formList";
+import { deleteForm, loadFormList } from "../../store/formList";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -14,8 +14,13 @@ const Home = () => {
   const formList = useSelector((state) => state.entities.formList.formList);
 
   // handle Search
-  const handleOnChange = (e) => {
-    console.log(e.target.value);
+  const handleDelete = (id) => {
+    // Ask confirmation to the user
+    const proceed = window.confirm("Are sure, want to Delete?");
+
+    if (proceed) {
+      dispatch(deleteForm(id));
+    }
   };
   return (
     <>
@@ -49,7 +54,6 @@ const Home = () => {
                     type="text"
                     placeholder="Search"
                     aria-label="Search"
-                    onChange={handleOnChange}
                   />
                 </form>
               </div>
@@ -62,6 +66,7 @@ const Home = () => {
                   <th scope="col">SI.</th>
                   <th scope="col">Name</th>
                   <th scope="col">Action</th>
+                  <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
@@ -84,6 +89,14 @@ const Home = () => {
                         >
                           Report
                         </Link>
+                      </td>
+                      <td>
+                        <button
+                          onClick={() => handleDelete(frm._id)}
+                          className="btn btn-danger btn-sm"
+                        >
+                          Delete
+                        </button>
                       </td>
                     </tr>
                   ))}
