@@ -1,15 +1,11 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { loadFormList } from "../../store/formList";
 import Navigation from "../Navigation/Navigation";
 
 const FormView = () => {
   // Captture id from slug
   const { id } = useParams();
-
-  const dispatch = useDispatch();
 
   // useEffect(() => {
   //   dispatch(loadFormList());
