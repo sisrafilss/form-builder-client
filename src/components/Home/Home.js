@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import Navigation from "../Navigation/Navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { setFormList } from "../../store/formList";
+import { loadFormList } from "../../store/formList";
 
 const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setFormList(["Contact", "Result", "Accomodation", "Food"]));
-  }, [dispatch]); 
+    dispatch(loadFormList());
+  }, [dispatch]);
 
   const formList = useSelector((state) => state.entities.formList.formList);
 
@@ -66,12 +66,11 @@ const Home = () => {
                   formList.map((frm, index) => (
                     <tr key={index}>
                       <th scope="row">{++index}</th>
-                      <td className="text-primary">{frm}</td>
+                      <td className="text-primary">{frm.name}</td>
                       <td>
-                        {" "}
                         <button className="btn btn-success btn-sm">
                           Report
-                        </button>{" "}
+                        </button>
                       </td>
                     </tr>
                   ))}

@@ -1,9 +1,17 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { saveNewForm } from "../../store/formList";
 import Navigation from "../Navigation/Navigation";
 
 const GenerateForm = () => {
-  const [fieldType, setFieldType] = useState([]);
-  const [fieldName, setFieldName] = useState([]);
+  // const [fieldType, setFieldType] = useState([]);
+  // const [fieldName, setFieldName] = useState([]);
+
+  const navigate = useNavigate();
+  // const location = useLocation();
+
+  const dispatch = useDispatch();
   const [form, setForm] = useState([
     <>
       <label htmlFor="formName" className="mb-2">
@@ -33,12 +41,22 @@ const GenerateForm = () => {
       types.push(e.target[i].name);
       fname.push(e.target[i].value);
     }
-    setFieldType(types);
-    setFieldName(fname);
+    // setFieldType(types);
+    // setFieldName(fname);
+
+    const newForm = {
+      name: fname[0],
+      fieldTypes: types,
+      fieldLabels: fname,
+    };
+    console.log(newForm);
+    dispatch(saveNewForm(newForm));
+    const from = "/";
+    navigate(from, { replace: true });
   };
 
-  console.log(fieldType);
-  console.log(fieldName);
+  // console.log(fieldType);
+  // console.log(fieldName);
 
   return (
     <>

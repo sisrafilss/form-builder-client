@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { apiCallBegan } from "./api";
 
 const initialState = {
   formList: [],
@@ -8,13 +9,28 @@ const formList = createSlice({
   name: "formList",
   initialState,
   reducers: {
-    setFormList: (state, action) => {
+    loadFormSuccess: (state, action) => {
       state.formList = action.payload;
-      // console.log(action.payload);
     },
   },
 });
 
-export const { setFormList } = formList.actions;
+export const { loadFormSuccess } = formList.actions;
 
 export default formList.reducer;
+
+// Action Creator
+const url = "/form-list";
+
+export const saveNewForm = (data) =>
+  apiCallBegan({
+    url,
+    method: "post",
+    data,
+  });
+
+export const loadFormList = () =>
+  apiCallBegan({
+    url,
+    onSuccess: loadFormSuccess.type,
+  });
