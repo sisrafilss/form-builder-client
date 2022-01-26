@@ -87,6 +87,12 @@ const GenerateForm = () => {
               Text
             </button>
             <button
+              onClick={() => handleGenerateField("Email")}
+              className="btn btn-success d-block mb-2"
+            >
+              Email
+            </button>
+            <button
               onClick={() => handleGenerateField("Number")}
               className="btn btn-success d-block mb-2"
             >

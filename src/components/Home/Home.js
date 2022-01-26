@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Navigation from "../Navigation/Navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { loadFormList } from "../../store/formList";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -66,7 +67,14 @@ const Home = () => {
                   formList.map((frm, index) => (
                     <tr key={index}>
                       <th scope="row">{++index}</th>
-                      <td className="text-primary">{frm.name}</td>
+                      <td>
+                        <Link
+                          className="text-primary text-decoration-none"
+                          to={`/home/${frm._id}`}
+                        >
+                          {frm.name}
+                        </Link>
+                      </td>
                       <td>
                         <button className="btn btn-success btn-sm">
                           Report
